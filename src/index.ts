@@ -2,7 +2,7 @@ import 'dotenv/config';
 import 'module-alias/register';
 import validateEnv from '@/utils/validateEnv';
 import App from './app';
-import PostController from '@/resources/post/post.controller';
+import PostController from '@/resources/profile/profile.controller';
 import UserController from './resources/user/user.controller';
 
 //check if all environment variables are correct

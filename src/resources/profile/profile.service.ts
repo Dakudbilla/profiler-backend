@@ -1,12 +1,12 @@
-import PostModel from '@/resources/post/post.model';
-import Post from '@/resources/post/post.interface';
+import ProfileModel from '@/resources/profile/profile.model';
+import Profile from './profile.interface';
 
 class PostService {
-    private post = PostModel;
+    private post = ProfileModel;
     /**
      * Create a new Post
      */
-    public async create(title: string, body: string): Promise<Post> {
+    public async create(title: string, body: string): Promise<Profile> {
         try {
             const post = await this.post.create({ title, body });
 

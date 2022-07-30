@@ -25,6 +25,13 @@ export default function validationMiddleware(
         };
 
         try {
+            /**
+             * Validate request body using the joi validation schema passed
+             * and validation options declared.
+             * After validation update the request body with new validated data,
+             * This is important because validation may have stripped out unnecessary data
+             * added by client
+             */
             const value = await schema.validateAsync(
                 req.body,
                 validationOptions
@@ -32,13 +39,17 @@ export default function validationMiddleware(
             req.body = value;
             next();
         } catch (e: any) {
-            //Put all validation errors into an array and send it to user
+            //Put all joi validation errors into an array and send it to user
             const errors: string[] = [];
 
             e.details.forEach((err: Joi.ValidationErrorItem) => {
                 errors.push(err.message);
             });
 
+            /**
+             * We do not use custom error middleware to handle these errors because
+             *Validation errors are caused by the user thus only useful to the user
+             */
             res.status(400).send({ errors });
         }
     };

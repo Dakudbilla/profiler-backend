@@ -1,10 +1,9 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import Controller from '@/utils/interfaces/controller.interface';
 import HttpException from '@/utils/exceptions/http.exception';
 import validationMiddleware from '@/middleware/validation.middleware';
 import validate from '@/resources/post/post.validation';
 import PostService from '@/resources/post/post.service';
-import { NextFunction } from 'express-serve-static-core';
 
 class PostController implements Controller {
     public path = '/posts';
@@ -12,13 +11,15 @@ class PostController implements Controller {
     private PostService;
 
     constructor() {
-        //configure all routes
+        //configure all routes associated with Posts
         this.initialiseRoutes();
         //create new instance of Post service
         this.PostService = new PostService();
     }
 
+    //Defines and adds all routes associated to Posts to express router
     private initialiseRoutes(): void {
+        //Add new Post route
         this.router.post(
             `${this.path}`,
             validationMiddleware(validate.create),

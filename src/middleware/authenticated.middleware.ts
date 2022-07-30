@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 
 async function authenticatedMiddleware(
     req: Request,
-    res: Response,
+    _res: Response,
     next: NextFunction
 ): Promise<Response | void> {
     const bearer = req.headers.authorization;
@@ -28,14 +28,21 @@ async function authenticatedMiddleware(
             return next(new HttpException(401, ' Unauthorised Access'));
         }
 
+        //Get user from database
         const user = await UserModel.findById(payload.id)
             .select('-password')
             .exec();
 
+        //Handle user not existent case
         if (!user) {
             return next(new HttpException(401, ' Unauthorised Access'));
         }
 
+        /**
+         * Set user on request (To prevent typescript screaming for user,
+         *   we add user interface to express response interface via global type interface
+         *  see @definitions folder under @utils folder)
+         */
         req.user = user;
         return next();
     } catch (err) {

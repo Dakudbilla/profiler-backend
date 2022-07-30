@@ -1,6 +1,6 @@
 import compression from 'compression';
 import express, { Application } from 'express';
-import mongoose, { Error } from 'mongoose';
+import mongoose from 'mongoose';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
@@ -46,7 +46,7 @@ class App {
     }
 
     /**
-     * Initalise application with all Error middlewares available
+     * Initalise application with all Error middlewares available throughout the application
      */
     private initialiseErrorHandling(): void {
         this.express.use(ErrorMiddleware);

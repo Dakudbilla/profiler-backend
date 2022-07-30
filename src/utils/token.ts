@@ -15,7 +15,7 @@ export const createToken = (user: User) => {
 
 /**
  * @description This function takes in a jwt token, decodes it and sends back the decoded parameters
- * @param user
+ * @param token
  * @returns the signed jwt token
  */
 export const verifyToken = async (

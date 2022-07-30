@@ -1,3 +1,8 @@
+/**
+ * Custom Error object that extends express
+ * default error object to make error beautiful
+ * to user
+ */
 class HttpException extends Error {
     public status: number;
     public override message: string;

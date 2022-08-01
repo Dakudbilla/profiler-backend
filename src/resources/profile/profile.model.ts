@@ -6,6 +6,11 @@ import Profile from '@/resources/profile/profile.interface';
  */
 const ProfileSchema = new Schema(
     {
+        /**
+         * TODO: Use Mongoose Populate to fill in the name and age from user
+         * and then remove name and age from schema
+         * Help link: https://mongoosejs.com/docs/typescript/populate.html
+         */
         user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'user',

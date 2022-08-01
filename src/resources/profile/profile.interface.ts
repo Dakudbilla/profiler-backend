@@ -7,54 +7,54 @@ import { Document } from 'mongoose';
 export default interface Profile extends Document {
     user: string;
     name: string;
-    age: string;
+    age: number;
     employment_status: string;
     skills: Skill[];
     bio: string;
     profile_image: string;
     experience: Experience[];
     education: Education[];
-    certification: Certification[];
-    social_links: Social;
+    certification?: Certification[];
+    social_links?: Social;
 }
 
-interface Education {
+export interface Education {
     school: string;
     from: Date;
-    to: Date;
+    to?: Date;
     field_of_study: string;
     degree: string;
     current: boolean;
-    description: string;
+    description?: string;
 }
 
-interface Experience {
+export interface Experience {
     title: string;
     company: string;
     company_location: string;
     from: Date;
-    to: string;
+    to?: string;
     current: boolean;
     description: string;
 }
 
-interface Certification {
+export interface Certification {
     name: string;
     issuing_org: string;
     issue_date: Date;
-    expiry_date: Date;
-    credential_url: string;
+    expiry_date?: Date;
+    credential_url?: string;
 }
 
-interface Skill {
+export interface Skill {
     name: string;
     years_of_experience: number;
 }
 
-interface Social {
-    youtube: string;
-    facebook: string;
-    twitter: string;
-    linkedin: string;
-    instagram: string;
+export interface Social {
+    youtube?: string;
+    facebook?: string;
+    twitter?: string;
+    linkedin?: string;
+    instagram?: string;
 }

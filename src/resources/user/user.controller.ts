@@ -50,7 +50,7 @@ class UserController implements Controller {
                 'user'
             );
 
-            res.status(201).json({ token });
+            return res.status(201).json({ token });
         } catch (error: any) {
             next(new HttpException(400, error.message));
         }

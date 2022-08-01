@@ -81,7 +81,7 @@ class ProfileController implements Controller {
             //     instagram,
             //     youtube,
             // };
-
+            req.body = { ...req.body, user: req.user };
             const profile = await this.ProfileService.create(req.body);
             if (profile) {
                 return res.status(201).json({

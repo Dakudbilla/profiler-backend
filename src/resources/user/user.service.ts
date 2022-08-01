@@ -11,7 +11,8 @@ class UserService {
         name: string,
         email: string,
         password: string,
-        role: string
+        role: string,
+        age: number
     ): Promise<String | Error> {
         try {
             const user = await this.user.create({
@@ -19,6 +20,7 @@ class UserService {
                 email,
                 password,
                 role,
+                age,
             });
 
             const accessToken = token.createToken(user);

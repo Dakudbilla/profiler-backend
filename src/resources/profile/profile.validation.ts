@@ -52,9 +52,6 @@ const constantFields = Joi.object({
  * Validate data that will be passed for creating a post
  */
 const create = Joi.object({
-    user: Joi.string().min(9),
-    name: Joi.string().min(1),
-    age: Joi.number().min(10),
     employment_status: Joi.string().min(2),
     bio: Joi.string().min(8).required(),
     profile_image: Joi.string().min(3),
@@ -72,7 +69,12 @@ const create = Joi.object({
             title: Joi.string().min(4),
             company: Joi.string().min(4),
             company_location: Joi.string().min(4),
-            from: Joi.date(),
+            from: Joi.date()
+                .iso()
+                .messages({
+                    'date.format': `Date format is YYYY-MM-DD`,
+                })
+                .required(),
             to: Joi.date(),
             current: Joi.bool(),
             description: Joi.string().min(4),

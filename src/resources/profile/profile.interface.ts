@@ -6,8 +6,6 @@ import { Document } from 'mongoose';
  */
 export default interface Profile extends Document {
     user: string;
-    name: string;
-    age: number;
     employment_status: string;
     skills: Skill[];
     bio: string;
@@ -15,7 +13,7 @@ export default interface Profile extends Document {
     experience: Experience[];
     education: Education[];
     certification?: Certification[];
-    social_links?: Social;
+    social?: Social;
 }
 
 export interface Education {

@@ -40,14 +40,15 @@ class UserController implements Controller {
         next: NextFunction
     ): Promise<Response | void> => {
         try {
-            const { name, email, password } = req.body;
+            const { name, email, password, age } = req.body;
 
             //Hardcode the role of the person registering, since we do not yet have it being passed at frontend
             const token = await this.UserService.register(
                 name,
                 email,
                 password,
-                'user'
+                'user',
+                age
             );
 
             return res.status(201).json({ token });

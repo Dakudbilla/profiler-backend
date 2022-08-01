@@ -13,10 +13,8 @@ const ProfileSchema = new Schema(
          */
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'user',
+            ref: 'User',
         },
-        name: { type: String, required: true },
-        age: { type: Number },
         employment_status: { type: String },
         skills: [
             {

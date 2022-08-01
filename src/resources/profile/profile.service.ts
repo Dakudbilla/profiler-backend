@@ -10,7 +10,6 @@ class ProfileService {
     public async create(profile: Profile): Promise<Profile> {
         try {
             const newprofile = await this.profileModel.create(profile);
-
             return newprofile;
         } catch (error: any) {
             throw new HttpException(400, error.message);
@@ -31,8 +30,6 @@ class ProfileService {
                 throw new HttpException(400, 'Profile not Found');
             }
             const {
-                name,
-                age,
                 employment_status,
                 profile_image,
                 bio,
@@ -40,19 +37,15 @@ class ProfileService {
                 education,
                 certification,
                 experience,
-                social_links,
+                social,
             } = profile;
-            if (name) updated_profile.name = name;
-            if (age) updated_profile.age = age;
             if (employment_status)
                 updated_profile.employment_status = employment_status;
             if (profile_image) updated_profile.profile_image = profile_image;
             if (bio) updated_profile.bio = bio;
-            if (social_links)
-                updated_profile.social_links = {
-                    ...updated_profile.social_links,
-                    ...social_links,
-                };
+            if (social) {
+                updated_profile.social = social;
+            }
             if (experience) {
                 // experience.map((exp) => {
                 // //Find index of experience to be updated
@@ -84,7 +77,10 @@ class ProfileService {
 
     public async getAll(): Promise<Profile[]> {
         try {
-            const profiles = await ProfileModel.find();
+            const profiles = await ProfileModel.find().populate('user', [
+                'name',
+                'age',
+            ]);
             return profiles;
         } catch (error: any) {
             throw new HttpException(400, error.message);
@@ -96,7 +92,10 @@ class ProfileService {
 
     public async getSingle(profileId: String): Promise<Profile> {
         try {
-            const profile = await ProfileModel.findById(profileId);
+            const profile = await ProfileModel.findById(profileId).populate(
+                'user',
+                ['name', 'age']
+            );
             if (profile) {
                 return profile;
             }

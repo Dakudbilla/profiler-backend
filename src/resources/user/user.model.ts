@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 import bcrypt from 'bcrypt';
-import User from './user.interface';
+import User from '@/resources/user/user.interface';
 
 const UserSchema = new Schema(
     {
@@ -8,6 +8,8 @@ const UserSchema = new Schema(
             type: String,
             required: true,
         },
+        age: { type: Number },
+
         email: {
             type: String,
             required: true,
